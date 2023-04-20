@@ -1,0 +1,6 @@
+Utilizar o PowerShell como Administrador
+
+## Habilitar a execução de scripts ##
+Set-ExecutionPolicy Unrestricted
+
+Chamar o script pelo powershell.
