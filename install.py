@@ -12,14 +12,20 @@ installationdirectory = 'c:\windows'
 
 
 #Copia o script para a pasta destino da instalação
-shutil.copy2('SharingConnection.ps1', installationdirectory)
+try:
+    shutil.copy2('SharingConnection.ps1', installationdirectory)
+    logging.info('arquivo de script foi copiado')
+except:
+    logging.info('arquivo de script NÃO foi copiado')
 
 
 #tenta criar a tarefa que será iniciada junto com o usuário
 try:
-    os.popen(rf'schtasks /create /sc ONLOGON /ru System /tr {installationdirectory}\sharingconnection.exe')
+    os.popen(rf'schtasks /create /sc ONLOGON /ru System /tr {installationdirectory}\sharingconnection.ps1 /tn smed\SharingConnection')
+    logging.info('Tarefa criada')
+
 except:
-    print('nao foi possivel criar tarefa')
+    logging.info('Tarefa criada')
 
 
 
